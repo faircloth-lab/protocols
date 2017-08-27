@@ -3,9 +3,10 @@ Changelog
 =============
 Most recent commit was ``\|version|``::
 
-    26402c0 - Brant Faircloth, 6 seconds ago : updating changelog
-    6e9f418 - Brant Faircloth, 10 minutes ago : adding preliminary documents for sphinx
-    5249804 - Brant Faircloth, 20 minutes ago : adding .gitignore
+    57778f2 - Brant Faircloth, 6 seconds ago : adding computer protocols
+    0a07513 - Brant Faircloth, 14 minutes ago : updating changelog
+    6e9f418 - Brant Faircloth, 24 minutes ago : adding preliminary documents for sphinx
+    5249804 - Brant Faircloth, 34 minutes ago : adding .gitignore
     5b7f55e - Brant Faircloth, 9 weeks ago : renaming images
     c896844 - Brant Faircloth, 9 weeks ago : rename images
     f375cd2 - Brant Faircloth, 9 weeks ago : adding sra images
