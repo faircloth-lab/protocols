@@ -1,10 +1,11 @@
-..  _Changelog:
+echo ..  _Changelog:
 Changelog
 =============
-Most recent commit was \ |version|::
+Most recent commit was ``\|version|``::
 
-    48815bf - Brant Faircloth, 6 minutes ago : adding preliminary documents for sphinx
-    5249804 - Brant Faircloth, 15 minutes ago : adding .gitignore
+    26402c0 - Brant Faircloth, 6 seconds ago : updating changelog
+    6e9f418 - Brant Faircloth, 10 minutes ago : adding preliminary documents for sphinx
+    5249804 - Brant Faircloth, 20 minutes ago : adding .gitignore
     5b7f55e - Brant Faircloth, 9 weeks ago : renaming images
     c896844 - Brant Faircloth, 9 weeks ago : rename images
     f375cd2 - Brant Faircloth, 9 weeks ago : adding sra images
