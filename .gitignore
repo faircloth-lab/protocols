@@ -1,0 +1,5 @@
+*.py[cod]
+
+# Sphinx
+_build
+docs/_build
