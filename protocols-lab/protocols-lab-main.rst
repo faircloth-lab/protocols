@@ -8,3 +8,4 @@ Lab Protocols
    :maxdepth: 1
 
    phenol-chloroform-extraction/main
+   gel-visualization/main
