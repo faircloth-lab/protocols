@@ -7,4 +7,4 @@ Lab Protocols
 .. toctree::
    :maxdepth: 1
 
-   test1/index
+   phenol-chloroform-extraction/main
