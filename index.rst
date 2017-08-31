@@ -16,11 +16,11 @@ Commit \ |version|. (:ref:`Changelog`)
 :Copyright: This documentation is available under a Creative Commons (`CC-BY`_) license.
 
 .. toctree::
-   :maxdepth: 4
-   :caption: Contents:
+    :maxdepth: 4
+    :caption: Contents:
 
-    protocols-lab/index
-    protocols-computer/index
+    protocols-lab/protocols-lab-main
+    protocols-computer/protocols-computer-main
 
 
 Indices and tables
