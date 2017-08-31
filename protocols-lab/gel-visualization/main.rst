@@ -2,8 +2,8 @@
 .. |date| date:: %d %B %Y %H:%M %Z (%z)
 
 
-Phenol Chloroform Extraction (for toepads)
-==========================================
+Gel Vizualiation
+================
 
 :Author: Carl Oliveros
 :Copyright: This documentation is available under a Creative Commons (`CC-BY`_) license.
