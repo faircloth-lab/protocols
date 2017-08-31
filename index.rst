@@ -7,7 +7,7 @@
 .. |date| date:: %d %B %Y %H:%M %Z (%z)
 
 faircloth-lab documentation
-=========================
+===========================
 
 Commit \ |version|. (:ref:`Changelog`)
 
@@ -15,13 +15,22 @@ Commit \ |version|. (:ref:`Changelog`)
 :Date: |date|
 :Copyright: This documentation is available under a Creative Commons (`CC-BY`_) license.
 
+
+Protocols
+=========
 .. toctree::
-    :maxdepth: 4
+    :maxdepth: 2
     :caption: Contents:
 
     protocols-lab/protocols-lab-main
     protocols-computer/protocols-computer-main
 
+Other Info
+==========
+.. toctree::
+   :maxdepth: 1
+
+   changelog
 
 Indices and tables
 ==================
