@@ -8,3 +8,4 @@ Computer Protocols
    :maxdepth: 1
 
    fix-incorrect-demultiplexing/main
+   three-rad/main
