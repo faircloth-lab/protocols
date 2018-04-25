@@ -9,3 +9,4 @@ Computer Protocols
 
    fix-incorrect-demultiplexing/main
    three-rad/main
+   svd-quartets/main
