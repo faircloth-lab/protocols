@@ -30,13 +30,13 @@ Steps
 #. Change directory into the `ubuntu-14-wqmc` directory
 #. Build the image for wQMC.  This will download all the stuff you need to run wQMC on 32-bit Ubuntu:
 
-.. code-block:: bash
+   .. code-block:: bash
 
-	docker build -t faircloth/wqmc .
+       docker build -t faircloth/wqmc .
 
 #. Now, run the docker image and mount a host directory to home directory of the container.  Here, we're mounting a directory we've created within the present working directory named `target`.   You can read from and write to this directory, so do your work in the container here:
 
-.. code-block:: bash
+   .. code-block:: bash
 
-    docker run -i -t -v "$(pwd)"/target/:/home/generic/data faircloth/wqmc /bin/bash
+       docker run -i -t -v "$(pwd)"/target/:/home/generic/data faircloth/wqmc /bin/bash
    
