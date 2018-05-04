@@ -7,6 +7,7 @@ Computer Protocols
 .. toctree::
    :maxdepth: 1
 
-   fix-incorrect-demultiplexing/main
-   three-rad/main
-   svd-quartets/main
+   sequencing/sequencing-fix-incorrect-demultiplexing
+   
+   analysis/analysis-SVD-quartets
+   analysis/analysis-three-rad

@@ -11,7 +11,7 @@
 Modification History
 --------------------
 
-.. program-output:: git log --graph --oneline --decorate -- protocols-computer/three-rad/main.rst
+.. program-output:: git log --graph --oneline --decorate -- protocols-computer/analysis/main.rst
 
 Purpose
 -------

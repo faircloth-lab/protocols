@@ -12,7 +12,7 @@ Phenol Chloroform Extraction (for toepads)
 Modification History
 --------------------
 
-.. program-output:: git log --graph --oneline --decorate -- protocols-lab/fix-incorrect-demultiplexing/main.rst
+.. program-output:: git log --graph --oneline --decorate -- protocols-lab/extraction/fix-incorrect-demultiplexing.rst
 
 
 Purpose

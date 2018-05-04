@@ -12,7 +12,7 @@ UCE Enrichment
 Modification History
 --------------------
 
-.. program-output:: git log --graph --oneline --decorate -- protocols-lab/fix-incorrect-demultiplexing/main.rst
+.. program-output:: git log --graph --oneline --decorate -- protocols-lab/enrichment/fix-incorrect-demultiplexing.rst
 
 
 Previous Versions

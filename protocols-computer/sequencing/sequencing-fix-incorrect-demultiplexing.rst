@@ -11,7 +11,7 @@ Fix Incorrect Demultiplexing
 Modification History
 --------------------
 
-.. program-output:: git log --graph --oneline --decorate -- protocols-computer/fix-incorrect-demultiplexing/main.rst
+.. program-output:: git log --graph --oneline --decorate -- protocols-computer/sequencing/fix-incorrect-demultiplexing.rst
 
 Purpose
 -------

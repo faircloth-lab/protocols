@@ -12,7 +12,7 @@ Gel Vizualiation
 Modification History
 --------------------
 
-.. program-output:: git log --graph --oneline --decorate -- protocols-lab/gel-visualization/main.rst
+.. program-output:: git log --graph --oneline --decorate -- protocols-lab/extraction/gel-visualization.rst
 
 
 Purpose

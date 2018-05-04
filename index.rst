@@ -22,8 +22,9 @@ Protocols
     :maxdepth: 2
     :caption: Contents:
 
-    protocols-lab/protocols-lab-main
-    protocols-computer/protocols-computer-main
+    protocols-lab/main
+    protocols-computer/main
+    protocols-data/main
 
 Other Info
 ==========

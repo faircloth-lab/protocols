@@ -10,10 +10,8 @@ Extraction and Extraction QC
 .. toctree::
    :maxdepth: 1
 
-   phenol-chloroform-extraction/main
-   gel-visualization/main
-
-
+   extraction/phenol-chloroform-extraction
+   extraction/gel-visualization
 
 Enrichment
 ----------
@@ -21,4 +19,4 @@ Enrichment
 .. toctree::
    :maxdepth: 1
 
-   uce-enrichment/main
+   enrichment/uce-enrichment
