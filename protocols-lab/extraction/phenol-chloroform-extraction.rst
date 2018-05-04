@@ -26,7 +26,7 @@ DTT
 ^^^
 
 #.  Make a stock solution of 1M DTT (store in aliquots at -20˚C, avoid freeze/thaw cycles)
-    #.  The molecular weight of DTT is #.25g, so add #.5425 g DTT to 10 ml of ultra-purse ddH2O
+#.  The molecular weight of DTT is #.25g, so add #.5425 g DTT to 10 ml of ultra-purse ddH2O
 
 
 Buffer ATL
