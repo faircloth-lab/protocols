@@ -7,8 +7,6 @@ Random Computer Snippets
 Subsample reads for R1 and R2 using seqtk
 -----------------------------------------
 
-In the following, the `2000000` is the number of reads that you want to sample.
-
 .. code-block:: bash
 	
 	READS=2000000
