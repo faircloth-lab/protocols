@@ -11,3 +11,5 @@ Computer Protocols
    
    analysis/analysis-SVD-quartets
    analysis/analysis-three-rad
+
+   snippets/random-computer-snippets
