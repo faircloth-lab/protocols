@@ -7,8 +7,11 @@ Random Computer Snippets
 Subsample reads for R1 and R2 using seqtk
 -----------------------------------------
 
+In the following, the `2000000` is the number of reads that you want to sample.
+
 .. code-block:: bash
 	
+	READS=2000000
 	for dir in /path/to/your/clearn/data/dir/from/illumiprocesser/*;
 	do 
 		RAND=$RANDOM;
@@ -16,6 +19,6 @@ Subsample reads for R1 and R2 using seqtk
 		for file in $dir/split-adapter-quality-trimmed/*-READ[1-2]*;
 		do
 			echo $file;
-			seqtk sample -s $RAND 2000000 file | gzip > $file:t:r:r.SUBSAMPLE.fastq.gz
+			seqtk sample -s $RAND $file $READS | gzip > $file:t:r:r.SUBSAMPLE.fastq.gz
 		done;
 	done
