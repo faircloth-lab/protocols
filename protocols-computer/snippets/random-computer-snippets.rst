@@ -74,7 +74,7 @@ This is still pretty darn slow.  We can parallelize using GNU `parallel`.  After
 
 	echo "starting $1";
 	wget ftp://ftp-trace.ncbi.nih.gov/sra/sra-instant/reads/ByRun/sra/SRR/${1[1,6]}/$1/$1.sra;
-	fastq-dump --split-3 --gzip --gzip $1.sra;
+	fastq-dump --split-3 --gzip $1.sra;
 	rm $1.sra;
 	echo "finished $1";
 
