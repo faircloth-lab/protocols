@@ -2,7 +2,7 @@
 .. |date| date:: %d %B %Y %H:%M %Z (%z)
 
 
-Gel Vizualiation
+Gel Visualiation
 ================
 
 :Author: Carl Oliveros
@@ -12,7 +12,9 @@ Gel Vizualiation
 Modification History
 --------------------
 
-.. program-output:: git log --graph --oneline --decorate -- protocols-lab/extraction/gel-visualization.rst
+See `Gel Visualization History`_ 
+
+.. _Gel Visualization History: https://github.com/faircloth-lab/protocols/commits/master/protocols-lab/extraction/gel-visualization.rst
 
 
 Purpose

@@ -11,7 +11,9 @@ Running SVD Quartets
 Modification History
 --------------------
 
-.. program-output:: git log --graph --oneline --decorate -- protocols-computer/analysis/analysis-SVD-quartets.rst
+See `Running SVD Quartets History`_ 
+
+.. _Running SVD Quartets History: https://github.com/faircloth-lab/protocols/blob/master/protocols-computer/analysis/analysis-SVD-quartets.rst
 
 Purpose
 -------

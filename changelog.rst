@@ -3,4 +3,6 @@
 Changelog
 =============
 
-.. program-output:: git log --graph --oneline --decorate -- ./
+See `github`_.
+
+.. _github: https://github.com/faircloth-lab/protocols/commits/master

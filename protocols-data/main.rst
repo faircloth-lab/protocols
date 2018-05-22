@@ -10,4 +10,4 @@ Data Protocols
    ncbi/register-a-bioproject.rst
    ncbi/register-a-biosample.rst
 
-   ncbi/submit-a-genome.rst
+#   ncbi/submit-a-genome.rst

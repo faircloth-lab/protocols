@@ -2,6 +2,7 @@
 .. |date| date:: %d %B %Y %H:%M %Z (%z)
 
 .. _BioProject:
+
 Register an NCBI BioProject
 ===========================
 
@@ -11,7 +12,9 @@ Register an NCBI BioProject
 Modification History
 --------------------
 
-.. program-output:: git log --graph --oneline --decorate -- protocols-data/ncbi/register-a-bioproject.rst
+See `Register an NCBI BioProject History`_.
+
+.. _Register an NCBI BioProject History: https://github.com/faircloth-lab/protocols/commits/master/protocols-data/ncbi/register-a-bioproject.rst
 
 
 Purpose

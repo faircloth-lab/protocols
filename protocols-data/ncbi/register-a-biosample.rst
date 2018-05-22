@@ -2,6 +2,7 @@
 .. |date| date:: %d %B %Y %H:%M %Z (%z)
 
 .. _BioSamples:
+
 Register NCBI BioSamples for a BioProject
 =========================================
 
@@ -11,7 +12,9 @@ Register NCBI BioSamples for a BioProject
 Modification History
 --------------------
 
-.. program-output:: git log --graph --oneline --decorate -- protocols-data/ncbi/register-a-bioproject.rst
+See `Register NCBI BioSamples for a BioProject History`_ 
+
+.. _Register NCBI BioSamples for a BioProject History: http://github.com/faircloth-lab/protocols/commits/master/protocols-data/ncbi/register-a-biosample.rst
 
 
 Purpose
@@ -110,5 +113,6 @@ Steps
         biosamplehelp@ncbi.nlm.nih.gov (for BioSample questions/replies)
         info@ncbi.nlm.nih.gov (for general questions regarding NCBI)
         ***********************************************************
+
 
 #. If you are uploading data to NCBI SRA proceed to :ref:`Submitting Read Data to NCBI SRA`_.

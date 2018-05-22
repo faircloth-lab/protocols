@@ -11,7 +11,9 @@
 Modification History
 --------------------
 
-.. program-output:: git log --graph --oneline --decorate -- protocols-computer/analysis/main.rst
+See `3RAD Demultiplexing and Analysis History`_ 
+
+.. _3RAD Demultiplexing and Analysis History: http://github.com/faircloth-lab/protocols/commits/master/protocols-computer/analysis/analysis-three-rad.rst
 
 Purpose
 -------

@@ -4,7 +4,19 @@
 Random Computer Snippets
 ========================
 
+:Author: Brant C. Faircloth
+:Copyright: This documentation is available under a Creative Commons (`CC-BY`_) license.
+
 All of the following assume that you are using the Z shell (zsh).  These may or may not work in BASH.
+
+
+Modification History
+--------------------
+
+See `Random Computer Snippets`_ 
+
+.. _Random Computer Snippets: https://github.com/faircloth-lab/protocols/commits/master/protocols-computer/snippets/random-computer-snippets.rst
+
 
 Subsample reads for R1 and R2 using seqtk
 -----------------------------------------

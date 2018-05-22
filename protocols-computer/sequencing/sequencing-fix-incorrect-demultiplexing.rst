@@ -11,7 +11,9 @@ Fix Incorrect Demultiplexing
 Modification History
 --------------------
 
-.. program-output:: git log --graph --oneline --decorate -- protocols-computer/sequencing/fix-incorrect-demultiplexing.rst
+See `Fix Incorrect Demultiplexing`_ 
+
+.. _Fix Incorrect Demultiplexing: https://github.com/faircloth-lab/protocols/commits/master/protocols-computer/sequencing/sequencing-fix-incorrect-demultiplexing.rst
 
 Purpose
 -------

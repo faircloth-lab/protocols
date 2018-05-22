@@ -12,7 +12,9 @@ Phenol Chloroform Extraction (for toepads)
 Modification History
 --------------------
 
-.. program-output:: git log --graph --oneline --decorate -- protocols-lab/extraction/fix-incorrect-demultiplexing.rst
+See `Phenol Chloroform Extraction (for toepads) History`_
+
+.. _Phenol Chloroform Extraction (for toepads): https://github.com/faircloth-lab/protocols/commits/master/protocols-lab/extraction/phenol-chloroform-extraction.rst
 
 
 Purpose
