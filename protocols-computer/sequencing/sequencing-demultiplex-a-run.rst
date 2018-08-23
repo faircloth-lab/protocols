@@ -1,8 +1,12 @@
 .. include:: ../../links.rst
 .. |date| date:: %d %B %Y %H:%M %Z (%z)
 
+
 Demultiplexing a Sequencing Run
 ===============================
+
+:Author: Brant C. Faircloth
+:Copyright: This documentation is available under a Creative Commons (`CC-BY`_) license.
 
 
 Modification History
