@@ -7,6 +7,7 @@ Computer Protocols
 .. toctree::
    :maxdepth: 1
 
+   sequencing/sequencing-demultiplex-a-run
    sequencing/sequencing-fix-incorrect-demultiplexing
    
    analysis/analysis-SVD-quartets
