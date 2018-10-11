@@ -104,3 +104,21 @@ Make sure you have GNU Parallel installed.  Then:
 	parallel gunzip ::: *
 
 The same can be applied to many `tar.gz` files in a directory by replacing gzip or gunzip with `tar -cf` or `tar -zf` or `tar -jf`.
+
+
+rsync a set of files or directories from a list, following symlinks
+-------------------------------------------------------------------
+
+Create a text file (`batch-1.txt`) that contains the list of files/directories to sync, like
+
+.. code-block:: bash
+
+	dir1
+	dir2
+	dir2
+
+Then, in the directory containing the directories to sync, run:
+
+.. code-block:: bash
+
+	rsync -avLP -e ssh `cat batch-1.txt` user@some.ip.addr.edu:/lustre1/brant/batch-1/
