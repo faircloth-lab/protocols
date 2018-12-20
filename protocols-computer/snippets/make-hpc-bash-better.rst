@@ -26,9 +26,10 @@ Steps
 
 3. While you are there, you may also want to add the following, which will give you prettier colors for``ls``:
    
-   .. code-block:: bash
+    .. code-block:: bash
    
         eval "$(dircolors)"
+
 
 4. And, finally, for ``~/.bashrc``, you may want your history to log more information and also to include time and date stamps.  You can do that by adding the following, which gives you a time stamp for all commands, ingnores duplicates, records lots of history lines, and immediately appends those lines to your history, rather than doing so when you log out (the standard behavior):
    
