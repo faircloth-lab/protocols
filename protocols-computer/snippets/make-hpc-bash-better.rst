@@ -1,8 +1,8 @@
 .. include:: ../../links.rst
 .. |date| date:: %d %B %Y %H:%M %Z (%z)
 
-Random Computer Snippets
-========================
+Make a better BASH config
+=========================
 
 :Author: Brant C. Faircloth
 :Copyright: This documentation is available under a Creative Commons (`CC-BY`_) license.
@@ -51,7 +51,5 @@ Steps
 
         set show-all-if-ambiguous on
         set completion-ignore-case on
-
-5. You 
 
 
