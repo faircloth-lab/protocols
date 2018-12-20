@@ -14,3 +14,4 @@ Computer Protocols
    analysis/analysis-three-rad
 
    snippets/random-computer-snippets
+   snippets/make-hpc-bash-better
