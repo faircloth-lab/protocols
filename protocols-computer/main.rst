@@ -19,7 +19,8 @@ Analysis
 
 .. toctree::
    :maxdepth: 1
-
+   
+   analysis/analysis-paup
    analysis/analysis-SVD-quartets
    analysis/analysis-three-rad
 
