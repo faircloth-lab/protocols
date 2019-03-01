@@ -14,7 +14,7 @@ Modification History
 
 See `Phenol Chloroform Extraction (for toepads) History`_
 
-.. _Phenol Chloroform Extraction (for toepads): https://github.com/faircloth-lab/protocols/commits/master/protocols-lab/extraction/phenol-chloroform-extraction.rst
+.. _Phenol Chloroform Extraction (for toepads) History: https://github.com/faircloth-lab/protocols/commits/master/protocols-lab/extraction/phenol-chloroform-extraction.rst
 
 
 Purpose
