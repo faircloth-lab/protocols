@@ -35,6 +35,7 @@ Snippets
     snippets/random-computer-snippets
     snippets/make-hpc-bash-better
     snippets/add-new-local-user
+    snippets/download-genomes-from-ncbi
 
 Compilation
 -----------
