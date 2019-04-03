@@ -133,3 +133,12 @@ Steps
             do elements=(${(s:,:)line});
             ncbi-genome-download -s genbank -T ${elements[2]} --verbose --format "fasta,assembly-report" --output ${elements[1]} vertebrate_other; 
         done
+
+8. Because ``ncbi-genome-download`` will download ALL of the assemblies for a given taxon in your list, you probably want to look at what actually was downloaded and cull/trim as needed. You can easily list all of the downloads to ``stdout`` with a command like:
+
+    .. code-block:: bash
+    
+        for i in *; 
+            do echo $i; 
+            ls $i/genbank/vertebrate_other/GCA_*/*.fna.gz;
+        done
