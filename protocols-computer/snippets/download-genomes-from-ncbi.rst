@@ -142,3 +142,22 @@ Steps
             do echo $i; 
             ls $i/genbank/vertebrate_other/GCA_*/*.fna.gz;
         done
+
+9. If you want to reformat all of these to 2bit and keep only the stuff you need:
+
+    .. code-block:: bash
+
+        for i in `find * -maxdepth 0 -type d`;
+            do echo "working on $i";
+            cp $i/genbank/vertebrate_other/GCA_*/*_assembly_report.txt $i/;
+            gunzip -c $i/genbank/vertebrate_other/GCA_*/*_genomic.fna.gz | faToTwoBit stdin $i/$i.2bit;
+            twoBitInfo $i/$i.2bit $i/$i.info;
+        done
+
+10. Now you can go back and delete the intermediate fasta files (leavint the 2bit files and summary assembly reports in place):
+
+    .. code-block:: bash
+
+        for i in `find * -maxdepth 0 -type d`;
+            do rm -rf $i/genbank;
+        done
