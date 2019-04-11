@@ -13,6 +13,13 @@ Sequencing
     sequencing/sequencing-demultiplex-a-run
     sequencing/sequencing-fix-incorrect-demultiplexing
 
+Assembly
+--------
+
+.. toctree::
+    :maxdepth: 1
+        
+    assembly/assembly-with-itero
 
 Analysis
 ----------
