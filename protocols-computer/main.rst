@@ -20,6 +20,7 @@ Assembly
     :maxdepth: 1
         
     assembly/assembly-with-itero
+    assembly/assembly-with-supernova
 
 Analysis
 ----------
@@ -44,10 +45,11 @@ Snippets
     snippets/add-new-local-user
     snippets/download-genomes-from-ncbi
 
-Compilation
------------
+Compilation/Installation
+------------------------
 
 .. toctree::
     :maxdepth: 1
 
     compilation/compile-pargenes
+    compilation/install-supernova
