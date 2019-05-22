@@ -12,7 +12,7 @@ Compiling IQ-tree
 Steps
 -----
 
-#. Download the source archive for `IQ-Tree`_ from github recursively so we get the correct dependencies.  Checkout 0.8.1-beta tag, but check the tags for `RAxML-NG`_ first to ensure there is not a newer version:
+#. Download the source archive for `IQ-Tree`_:
 
     .. code-block:: bash
 

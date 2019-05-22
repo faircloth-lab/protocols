@@ -30,6 +30,7 @@ Analysis
     
     analysis/analysis-paup
     analysis/analysis-pargenes
+    analysis/analysis-raxml-ng
     analysis/analysis-SVD-quartets
     analysis/analysis-three-rad
 
@@ -53,5 +54,5 @@ Compilation/Installation
 
     compilation/compiling-iq-tree
     compilation/compiling-pargenes
-    compilation/raxml-ng
+    compilation/compiling-raxml-ng
     compilation/installing-supernova
