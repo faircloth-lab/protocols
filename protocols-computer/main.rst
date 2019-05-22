@@ -51,5 +51,7 @@ Compilation/Installation
 .. toctree::
     :maxdepth: 1
 
-    compilation/compile-pargenes
-    compilation/install-supernova
+    compilation/compiling-iq-tree
+    compilation/compiling-pargenes
+    compilation/raxml-ng
+    compilation/installing-supernova

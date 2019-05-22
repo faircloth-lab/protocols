@@ -36,8 +36,8 @@ Steps
    
     .. code-block:: bash
     
-        export CC=/usr/local/compilers/gcc/6.4.0/bin/gcc
-        export CXX=/usr/local/compilers/gcc/6.4.0/bin/g++
+        export CC=`which gcc`
+        export CXX=`which g++`
 
 
 4. Now we should be able to compile:
