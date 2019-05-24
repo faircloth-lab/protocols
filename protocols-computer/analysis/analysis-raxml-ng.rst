@@ -35,10 +35,10 @@ Preliminary Steps
 #. To compile RAxML-NG, see :ref:`CompilingRaxmlng`
 
 
-Steps
------
+Data Preparation
+----------------
 
-#. Setup directory structure on @supermike. Generally speaking, I make a ``project`` folder within my ``work`` directory (where ``work`` is symlinked to ``/work/brant``.  So, using Anna's Diglossa as an example:
+#. RAxML accepts data in two format: PHYLIP and FASTA. Setup directory structure on @supermike to contain these data. Generally speaking, I make a ``project`` folder within my ``work`` directory (where ``work`` is symlinked to ``/work/brant``.  So, using Anna's Diglossa as an example:
 
     .. code-block:: bash
 
@@ -177,6 +177,8 @@ With that information in hand, setup a second submission script ``raxml-best-tre
         #PBS -o raxmlng-std-mpi.out
         #PBS -e raxmlng-std-mpi.err
 
+        module load impi/2018.0.128
+
         cd $PBS_O_WORKDIR
         SEED=$RANDOM
         echo $SEED
@@ -203,6 +205,8 @@ Sometimes, the tree you are trying to infer is large (due to the # of tips, the 
         #PBS -N raxmlng-std-mpi
         #PBS -o raxmlng-std-mpi.out
         #PBS -e raxmlng-std-mpi.err
+
+        module load impi/2018.0.128
 
         cd $PBS_O_WORKDIR
         SEED=$RANDOM
@@ -232,6 +236,8 @@ Along similar lines, if you've separated how RAxML runs into two parts, you woul
         #PBS -o raxmlng-std-mpi.out
         #PBS -e raxmlng-std-mpi.err
 
+        module load impi/2018.0.128
+
         cd $PBS_O_WORKDIR
         SEED=$RANDOM
         echo $SEED
@@ -259,6 +265,8 @@ And, if you have separate files for the best ML tree and the boostrap replicates
         #PBS -N raxmlng-std-mpi
         #PBS -o raxmlng-std-mpi.out
         #PBS -e raxmlng-std-mpi.err
+
+        module load impi/2018.0.128
 
         cd $PBS_O_WORKDIR
 
