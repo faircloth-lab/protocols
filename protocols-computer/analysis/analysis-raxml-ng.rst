@@ -66,6 +66,9 @@ Data Preparation
         #PBS -o raxmlng-parse.out
         #PBS -e raxmlng-parse.err
 
+        module load gcc/6.4.0
+        module load impi/2018.0.128
+
         cd $PBS_O_WORKDIR
 
         /project/brant/shared/bin/raxml-ng \
@@ -177,6 +180,7 @@ With that information in hand, setup a second submission script ``raxml-best-tre
         #PBS -o raxmlng-std-mpi.out
         #PBS -e raxmlng-std-mpi.err
 
+        module load gcc/6.4.0
         module load impi/2018.0.128
 
         cd $PBS_O_WORKDIR
@@ -206,6 +210,7 @@ Sometimes, the tree you are trying to infer is large (due to the # of tips, the 
         #PBS -o raxmlng-std-mpi.out
         #PBS -e raxmlng-std-mpi.err
 
+        module load gcc/6.4.0
         module load impi/2018.0.128
 
         cd $PBS_O_WORKDIR
@@ -236,6 +241,7 @@ Along similar lines, if you've separated how RAxML runs into two parts, you woul
         #PBS -o raxmlng-std-mpi.out
         #PBS -e raxmlng-std-mpi.err
 
+        module load gcc/6.4.0
         module load impi/2018.0.128
 
         cd $PBS_O_WORKDIR
@@ -266,6 +272,7 @@ And, if you have separate files for the best ML tree and the boostrap replicates
         #PBS -o raxmlng-std-mpi.out
         #PBS -e raxmlng-std-mpi.err
 
+        module load gcc/6.4.0
         module load impi/2018.0.128
 
         cd $PBS_O_WORKDIR
