@@ -20,6 +20,8 @@ See `Setting Up Personal Websites`_.
 Purpose
 -------
 
+I've setup personal wordpress installations for everyone in the lab (that wants one) - primarily so that folks don't have to use weebly.
+
 
 Steps
 -----
