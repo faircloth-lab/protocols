@@ -60,3 +60,4 @@
 .. _Applied Genetics Laboratories: http://www.appliedgenetics.com/products/hybloc-competitor-dna/
 .. _NCBI BioProject: https://www.ncbi.nlm.nih.gov/bioproject/
 .. _bioconda: https://bioconda.github.io
+.. _canu: https://github.com/marbl/canu
