@@ -47,7 +47,7 @@ master_doc = 'index'
 
 # General information about the project.
 project = 'faircloth-lab'
-copyright = '2017-2018, Brant Faircloth'
+copyright = '2017-2019, Brant Faircloth and The Faircloth Lab'
 author = 'Brant Faircloth'
 
 # Use some code to grab our current git commit
