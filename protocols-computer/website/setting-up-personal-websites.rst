@@ -42,7 +42,7 @@ Steps
         cd /etc/nginx/conf.d/
         cp template.website.bak <name>.faircloth-lab.org
 
-#. Edit file to reflect reasonable values (change ``<name>``):
+#. Edit file to reflect reasonable values (change ``<name>``)
 
     .. code-block:: txt
 
@@ -90,10 +90,21 @@ Steps
         
         certbot --nginx
 
-#. Visit new site:
+#. Visit new site and setup
 
     .. code-block:: txt
 
         https://<name>.faircloth-lab.org/
 
+#. At new site, turn of ability to comment, remove sample comment, and turn off discussion for initial post
+#. Copy over theme files
+#. Adjust permissions
 
+    .. code-block:: bash
+
+        chown nginx:nginx <name>.faircloth-lab.org/{logs,public_html}
+        cd public_html
+        chown -R <admin>:<admin> -R *
+        chown -R nginx:nginx wp-content
+        find . -type d -exec chmod 755 {} \;
+        find . -type f -exec chmod 644 {} \;
