@@ -56,3 +56,11 @@ Compilation/Installation
     compilation/compiling-pargenes
     compilation/compiling-raxml-ng
     compilation/installing-supernova
+
+Website
+-------
+
+.. toctree::
+    :maxdepth: 1
+
+    website/setting-up-personal-websites
