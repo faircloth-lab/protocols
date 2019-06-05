@@ -4,6 +4,17 @@
 Data Protocols
 ==============
 
+Lab specific
+------------
+
+.. toctree::
+   :maxdepth: 1
+
+   lab/archive-sequencing-data.rst
+
+NCBI
+----
+
 .. toctree::
    :maxdepth: 1
 
