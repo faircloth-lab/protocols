@@ -29,7 +29,7 @@ Steps
 
     .. code-block:: bash
 
-        export PATH=/home/brant/work/supernova-2.1.1:$PATH
+        export PATH=/home/brant/project/shared/bin/supernova-2.1.1/:$PATH
 
 5. Everything should be good to go, now.  You can test the software installation using a submission script like the following:
 
@@ -46,7 +46,7 @@ Steps
         #PBS -e supernova_test.err
 
 
-        export PATH=/home/brant/work/supernova-2.1.1:$PATH
+        export PATH=/home/brant/project/shared/bin/supernova-2.1.1/:$PATH
 
         cd $PBS_O_WORKDIR
         supernova testrun --id=tiny
@@ -66,7 +66,3 @@ Steps
         Pipestance completed successfully!
 
         Saving pipestance info to tiny/tiny.mri.tgz
-
-
-    
-
