@@ -21,6 +21,7 @@ Assembly
         
     assembly/assembly-with-itero
     assembly/assembly-with-supernova
+    assembly/assembly-with-canu
 
 Analysis
 ----------
@@ -55,6 +56,7 @@ Compilation/Installation
     compilation/compiling-iq-tree
     compilation/compiling-pargenes
     compilation/compiling-raxml-ng
+    compilation/compiling-canu
     compilation/installing-supernova
 
 Website
