@@ -3,8 +3,8 @@
 
 .. _AssemblyWithCanu:
 
-De Novo Assemblies With Canu
-============================
+Assembly With Canu
+==================
 
 :Author: Brant C. Faircloth
 :Copyright: This documentation is available under a Creative Commons (`CC-BY`_) license.
@@ -12,9 +12,9 @@ De Novo Assemblies With Canu
 Modification History
 --------------------
 
-See `De Novo Assemblies With Canu`_.
+See `Assembly With Canu`_.
 
-.. _De Novo Assemblies With Canu: https://github.com/faircloth-lab/protocols/commits/master/protocols-computer/assembly/assembly-with-canu.rst
+.. _Assembly With Canu: https://github.com/faircloth-lab/protocols/commits/master/protocols-computer/assembly/assembly-with-canu.rst
 
 
 Purpose
