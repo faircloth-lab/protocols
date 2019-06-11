@@ -104,9 +104,11 @@ Steps
       canu \
           -p arabidopsis \
           -d arabidopsis-pacbio \
-          genomeSize=1.1g \
+          genomeSize=123m \
           useGrid=false \
           -pacbio-raw ../pacbio-fastq/*.fastq.gz 1>canu-assembly.stdout 2>canu-assembly.stderr
+   
+   .. warning:: You will need to adjust the genome size of your organism in the above to something that's suitable.  Gb-size genome size is set using ``genomeSize=1.1g``, which would be appropriate for a bird.
 
 #. If you need to restart the job at any time (e.g., you run out of walltime, which is likely), you may want to rename ``canu-assembly.stdout`` and ``canu-assembly.stderr``, so they are not overwritten:
 
