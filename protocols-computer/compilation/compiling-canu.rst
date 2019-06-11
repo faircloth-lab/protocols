@@ -3,14 +3,11 @@
 
 .. _CompilingCanu:
 
-Compiling Supernova
-===================
+Compiling Canu
+==============
 
 :Author: Brant C. Faircloth
 :Copyright: This documentation is available under a Creative Commons (`CC-BY`_) license.
-
-.. _canu: https://github.com/marbl/canu
-
 
 Steps
 -----
