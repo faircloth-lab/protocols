@@ -61,3 +61,7 @@
 .. _NCBI BioProject: https://www.ncbi.nlm.nih.gov/bioproject/
 .. _bioconda: https://bioconda.github.io
 .. _canu: https://github.com/marbl/canu
+.. _longranger: https://support.10xgenomics.com/genome-exome/software/pipelines/latest/installation 
+.. _arks: https://github.com/bcgsc/arks
+.. _links: https://github.com/bcgsc/LINKS
+.. _tigmint: https://github.com/bcgsc/tigmint

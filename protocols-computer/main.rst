@@ -22,6 +22,7 @@ Assembly
     assembly/assembly-with-itero
     assembly/assembly-with-supernova
     assembly/assembly-with-canu
+    assembly/assembly-scaffolding-with-arks-and-links
 
 Analysis
 ----------
@@ -57,6 +58,7 @@ Compilation/Installation
     compilation/compiling-pargenes
     compilation/compiling-raxml-ng
     compilation/compiling-canu
+    compilation/compiling-arks-and-links
     compilation/installing-supernova
 
 Website
