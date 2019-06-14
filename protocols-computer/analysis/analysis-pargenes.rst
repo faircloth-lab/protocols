@@ -75,7 +75,7 @@ Steps
         cd $PBS_O_WORKDIR
         CORES=16
 
-        python /project/brant/shared/src/pargenes-mpi/pargenes.py \
+        python /project/brant/shared/src/pargenes/pargenes/pargenes.py \
             -a input-alignments-fasta-reduced \
             -o input-alignments-fasta-reduced-pargenes-dry-run \
             -d nt \
@@ -96,7 +96,7 @@ Steps
         cd $PBS_O_WORKDIR
         CORES=512
 
-        python /project/brant/shared/src/pargenes-mpi/pargenes/pargenes-hpc.py \
+        python /project/brant/shared/src/pargenes/pargenes/pargenes.py \
             -a input-alignments-fasta-reduced \
             -o input-alignments-fasta-reduced-pargenes-bootstraps \
             -d nt \
