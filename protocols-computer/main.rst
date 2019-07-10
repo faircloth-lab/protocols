@@ -23,6 +23,7 @@ Assembly
     assembly/assembly-with-supernova
     assembly/assembly-with-canu
     assembly/assembly-scaffolding-with-arks-and-links
+    assembly/polishing-with-pilon
 
 Analysis
 ----------
