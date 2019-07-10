@@ -46,7 +46,7 @@ Steps
 
 #. Edit file to reflect reasonable values (change ``<name>``)
 
-    .. code-block:: txt
+    .. code-block:: text
 
         server {
             listen       80;
@@ -94,7 +94,7 @@ Steps
 
 #. Visit new site and setup
 
-    .. code-block:: txt
+    .. code-block:: text
 
         https://<name>.faircloth-lab.org/
 
