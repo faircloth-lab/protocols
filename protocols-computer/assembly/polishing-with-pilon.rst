@@ -125,7 +125,7 @@ Steps
 
 #. Submit that job and let it run.  It will take a fair amount of time (~18 hours to map something like 40 GB data)
 #. Once the job has run, you should have a directory ``bwa-aligned`` that contains the output bam file, the reads, and the assembly.  Moving forward, we only need to care about the BAM file and the assembly.
-#. Running Pilon_ is pretty simple - it just needs to use a lot of RAM.  We need to setup an appropriate ``qsub`` script for the run:
+#. Running Pilon_ is pretty simple - it just needs to use a lot of RAM (why we need to run it @qb2).  We need to setup an appropriate ``qsub`` script for the run:
 
     .. code-block:: bash
 
