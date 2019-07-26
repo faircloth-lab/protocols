@@ -54,37 +54,16 @@ First, create a list of SRRs in a file, `sra-records.txt`, that looks something 
 	SRR453274
 	SRR453263
 
-`fastq-dump` is slow AF over the internet. It's faster to download the SRA file using wget, then parse that into fastq:
+Be sure to use `fasterq-dump`, it's actually fast.  It will use 6 threads by default:
 
 .. code-block:: bash
 
 	for record in `cat sra-records.txt`; 
 	do
 		echo $record;
-		wget ftp://ftp-trace.ncbi.nih.gov/sra/sra-instant/reads/ByRun/sra/SRR/${record[1,6]}/$record/$record.sra;
-		fastq-dump --split-3 --gzip $record.sra;
-		rm $record.sra;
+		fastq-dump $record;
 	done
 
-This is still pretty darn slow.  We can parallelize using GNU `parallel`.  After creating `sra-records.txt` to hold the list of files that we need, create a script named `get_sra.sh` with the following contents:
-
-.. code-block:: bash
-
-	#!/bin/zsh
-
-	echo "starting $1";
-	wget ftp://ftp-trace.ncbi.nih.gov/sra/sra-instant/reads/ByRun/sra/SRR/${1[1,6]}/$1/$1.sra;
-	fastq-dump --split-3 --gzip $1.sra;
-	rm $1.sra;
-	echo "finished $1";
-
-Once, that's completed, make it executable (`chmod 0755 get_sra.sh`). Now, you can run this on 12 cores (`--jobs 12`) using:
-
-.. code-block:: bash
-
-	parallel --progress --joblog logfile --jobs 12 -a sra-records.txt ./get_sra.sh {$1}
-
-This will download the files from SRA and convert them to fastq.gz in parallel.
 
 Zip or unzip many files in parallel
 -----------------------------------
