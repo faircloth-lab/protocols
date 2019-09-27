@@ -32,8 +32,10 @@ Analysis
     :maxdepth: 1
     
     analysis/analysis-paup
+    analysis/analysis-pasta
     analysis/analysis-pargenes
     analysis/analysis-raxml-ng
+    analysis/analysis-iq-tree
     analysis/analysis-SVD-quartets
     analysis/analysis-three-rad
 

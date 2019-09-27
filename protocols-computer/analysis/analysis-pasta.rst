@@ -184,9 +184,9 @@ Steps
                 -a loci-to-align.list \
                 ./pasta.sh {$1} {$2} {$3}
 
-#. Submit the job: ``qsub pasta.qsub``.  Be sure to monitor the job with ``checkjob -j <job_number>`` to ensure you are using resources apprpriately.
+#. Submit the job: ``qsub pasta.qsub``.  Be sure to monitor the job with ``checkjob -j <job_number>`` to ensure you are using resources approriately.
 
-#. One the jobs is finished, your alignment data should be in the ``pasta-output`` folder.  However, the way that Pasta_ formats things, they data are sort of messy.  So, you have a couple of options.  The easiest is probably to create a new folder and symlink the alignments for each loci to the new folder.  This is easiest to do if you are using zsh_:
+#. One the jobs is finished, your alignment data should be in the ``pasta-output`` folder.  However, the way that Pasta_ formats things, they data are sort of messy.  So, you have a couple of options.  The easiest is probably to create a new folder and symlink the alignments for each loci to the new folder.  This is easiest to do if you are using zsh:
 
     .. code-block:: bash
 
@@ -232,9 +232,5 @@ Steps
 
     .. code-block:: bash
 
-        phyluce_align_remove_locus_name_from_nexus_lines \
-            --alignments alignment-files-trim \
-            --output alignment-files-clean \
-            --input-format nexus \
-            --output-format nexus \
-            --cores 12
+        mkdir alignment-files-clean && cd alignment-files-clean
+        for i in ../alignment-files-trim/*; do cat $i | sed 's/uce\-[0-9]\+_'//g > $i:t; done

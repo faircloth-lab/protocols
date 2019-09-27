@@ -67,3 +67,4 @@
 .. _tigmint: https://github.com/bcgsc/tigmint
 .. _10X: https://www.10xgenomics.com
 .. _Pilon: https://github.com/broadinstitute/pilon/wiki
+.. _raxml-ng: https://github.com/amkozlov/raxml-ng
