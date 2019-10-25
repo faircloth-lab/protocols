@@ -68,3 +68,8 @@
 .. _10X: https://www.10xgenomics.com
 .. _Pilon: https://github.com/broadinstitute/pilon/wiki
 .. _raxml-ng: https://github.com/amkozlov/raxml-ng
+.. _cactus: https://github.com/ComparativeGenomicsToolkit/cactus
+.. _boto: http://boto.cloudhackers.com/en/latest/
+.. _toil: https://github.com/DataBiosphere/toil
+.. _aws: https://aws.amazon.com
+.. _ec2: https://aws.amazon.com/ec2/

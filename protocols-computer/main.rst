@@ -31,6 +31,7 @@ Analysis
 .. toctree::
     :maxdepth: 1
     
+    analysis/analysis-cactus
     analysis/analysis-paup
     analysis/analysis-pasta
     analysis/analysis-pargenes
