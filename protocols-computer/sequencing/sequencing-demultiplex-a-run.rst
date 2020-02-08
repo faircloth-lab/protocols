@@ -87,7 +87,7 @@ Steps
 
     .. code-block:: bash
 
-        ~/src/BBMap_38.22/demuxbyname.sh \
+        ~/src/BBMap_38.73/demuxbyname.sh \
             prefixmode=f \
             in=../Undetermined_S0_L001_R1_001.fastq.gz \
             in2=../Undetermined_S0_L001_R2_001.fastq.gz \
