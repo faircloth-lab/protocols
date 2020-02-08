@@ -29,7 +29,9 @@ Preliminary Steps
 
 #. Cactus_ is built on top of a CoreOS image.  Before running any analyses, you'll need to "subscribe" to use the Container Linux by CoreOS AMI. You will encounter errors if this is not done.  You can do this by following this link, logging into your AWS account, and clicking "Continue to Subscribe": https://aws.amazon.com/marketplace/pp/B01H62FDJM/.
 
-#. Finally, it's very likely you will need to increase your service limits on AWS.  In particular, you'll probably need to request an increase to the minimum number of "Spot" ``c4.8xlarge`` instances you can request (default is 20), and you'll probably also need to request an increase to the minimum number of "On Demand" ``1r3.8xlarge`` instances you can run (default is 1).  You start this process by going to the EC2 console and clicking on "Limits" in the left column of stuff.
+#. It's very likely you will need to increase your service limits on AWS.  In particular, you'll probably need to request an increase to the minimum number of "Spot" ``c4.8xlarge`` instances you can request (default is 20), and you'll probably also need to request an increase to the minimum number of "On Demand" ``1r3.8xlarge`` instances you can run (default is 1).  You start this process by going to the EC2 console and clicking on "Limits" in the left column of stuff.
+
+#. It's also very likely you'll need to create a EBS volume if you are running analyses that produce large files.  You can do this using the AWS web interface.  Be sure to create a volume of reasonable size and note the volume ID.
 
 Steps
 -----
@@ -82,19 +84,13 @@ Steps
    .. code-block:: bash
 
     # make the conda environment, installing awscli and python 2
-    conda create -n cactus python=2 awscli
+    conda create -n cactus python=3.6 awscli
 
     # activate the environment
     conda activate cactus
 
     # install toil
     pip install --upgrade "toil[aws]"
-
-    # install cactus. to do that navigate to the tmp directory in our conda install
-    cd ~/conda/envs/cactus/tmp
-    git clone https://github.com/comparativegenomicstoolkit/cactus.git
-    cd cactus
-    pip install --upgrade .
 
 #. Finally, we need to place our AWS credentials in two places.  Ensure you are in the ``cactus`` environment just created
 
@@ -117,11 +113,19 @@ Steps
 
    .. code-block:: bash
 
-    toil launch-cluster -z us-east-1a faircloth-test --keyPairName id_aws --leaderNodeType t2.medium
+    toil launch-cluster -z us-east-1a --keyPairName id_aws --leaderNodeType t2.medium --leaderStorage 1000 faircloth-test 
 
    .. admonition:: Warning 
 
     You need to think about which region to use - in my case, I learned that ``us-east-2`` will **NOT** work because the region needs to have SimpleDB available.  Here, we're simply using ``us-east-1`` because it has everything.
+
+   .. admonition:: Warning 
+
+    Also, be sure that the ``clusterName`` parameter ("faircloth-test") in the above, comes **LAST** in the arugment list.  This argument is positional, and it looks like the cluster you create will not receive a name if the position of the arugment is incorrect.  This will cause downstream problems.
+
+   .. admonition:: Note 
+
+    We're passing a parameter that will mount a 1 TB EBS volume on the leader node using the ``--leaderStorage`` parameter.  If you need another amount of storage, adjust. Otherwise, exclude the entire parameter ``--leaderStorage 1000``.
 
 #. This will spin up a ``t2.medium`` node, which is relatively small, and we'll start working on AWS through this node.  It can take some time, and you might want to monitor progress using the web interface to EC2.
 
