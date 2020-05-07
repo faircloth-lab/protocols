@@ -23,15 +23,11 @@ Cactus_ is a program for aligning genomes together (i.e., genome-genome alignmen
 Preliminary Steps
 -----------------
 
-#. Do what you need to to create an account for AWS_.  We have a somewhat complicated setup, but you basically need an account, and you need to create an IAM user that has permission to run EC2 instances.  For that IAM user, you also need their ACCESS_KEYS.
+#. Create an account for AWS_.  We have a somewhat complicated setup, but you basically need an account, and you need to create an IAM user that has permission to run EC2 instances.  For that IAM user, you also need their ACCESS_KEYS.
 
 #. For the IAM user, go to ``IAM > Users (side tab) > Security Credentials``.  Create an access key and be sure to copy the values of ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY``.  You'll need these later.
 
-#. Cactus_ is built on top of a CoreOS image.  Before running any analyses, you'll need to "subscribe" to use the Container Linux by CoreOS AMI. You will encounter errors if this is not done.  You can do this by following this link, logging into your AWS account, and clicking "Continue to Subscribe": https://aws.amazon.com/marketplace/pp/B01H62FDJM/.
-
-#. It's very likely you will need to increase your service limits on AWS.  In particular, you'll probably need to request an increase to the minimum number of "Spot" ``c4.8xlarge`` instances you can request (default is 20), and you'll probably also need to request an increase to the minimum number of "On Demand" ``1r3.8xlarge`` instances you can run (default is 1).  You start this process by going to the EC2 console and clicking on "Limits" in the left column of stuff.
-
-#. It's also very likely you'll need to create a EBS volume if you are running analyses that produce large files.  You can do this using the AWS web interface.  Be sure to create a volume of reasonable size and note the volume ID.
+#. It's very likely you will need to increase your service limits on AWS.  In particular, you'll probably need to request an increase to the minimum number of "Spot" ``c4.8xlarge`` instances you can request (default is 20), and you'll probably also need to request an increase to the minimum number of "On Demand" ``r3.8xlarge`` instances you can run (default is 1).  You start this process by going to the EC2 console and clicking on "Limits" in the left column of stuff.  It usually takes a few hours to a day or so.
 
 Steps
 -----
@@ -79,20 +75,27 @@ Steps
 
    .. image:: /images/amazon-ec2-add-pubkey.png
 
-#. Now, we need to install all the software needed to run Cactus_.  We're going to do that in a conda_ environment, because we use conda_ all the time and it's pretty easy to create new/test environments.  FYI, this differs a little from the cactus_ website.  Go ahead and setup the environment and install some needed stuff:
+#. Now, we need to install the software needed to run Cactus_ on our *local* machine (@local).  We're going to do that in a conda_ environment, because we use conda_ all the time and it's pretty easy to create new/test environments.  You can also use virtualenv. FYI, this differs a little from the cactus_ website.  Go ahead and setup the environment and install some needed stuff:
 
    .. code-block:: bash
 
-    # make the conda environment, installing awscli and python 2
+    # make the conda environment with python 3.6 as default
     conda create -n cactus python=3.6 awscli
 
     # activate the environment
     conda activate cactus
 
-    # install toil
-    pip install --upgrade "toil[aws]"
+    # toil 3.24.0 seems to have problems on AWS, so install 4.1.0
+    pip install "toil[aws]"
 
-#. Finally, we need to place our AWS credentials in two places.  Ensure you are in the ``cactus`` environment just created
+    # check the cactus repository out to some location on @local
+    git clone https://github.com/comparativegenomicstoolkit/cactus.git --recursive && cd cactus
+
+    # checkout a specific tag (e.g. v1.0.0) if so desired
+    git checkout v1.0.0
+
+    # install cactus
+    pip install --upgrade .
 
 #. Run the AWS configuration utility and follow the instructions and enter the ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY`` when prompted.  Also enter the relevant zone in which you want to run your EC2 instances:
 
@@ -100,20 +103,11 @@ Steps
 
     aws configure
 
-#. Cactus_ uses toil_ which uses boto_.  Per the toil_ recommendations, add your ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY`` to ``~/.boto.conf`` so that its contents look like (paste in your values for ``AWS_ACCESS_KEY_ID`` and ``AWS_SECRET_ACCESS_KEY`` and not what's below):
+#. We should basically be able good to go now, go ahead and launch what's known as the "leader" instance.  Be sure to adjust your availability zone to whatever you want to use.
 
    .. code-block:: bash
 
-    [Credentials]
-    aws_access_key_id = ****************XXX
-    aws_secret_access_key = ****************YYY
-
-
-#. We should basically be able good to go now, go ahead and launch what's known as the "leader" instance.  Be sure to adjust your availability zone to whatever you want to use
-
-   .. code-block:: bash
-
-    toil launch-cluster -z us-east-1a --keyPairName id_aws --leaderNodeType t2.medium --leaderStorage 1000 faircloth-test 
+    toil launch-cluster -z us-east-1a --keyPairName id_aws --leaderNodeType t2.medium --leaderStorage 1000 --nodeStorage 250 faircloth-cactus
 
    .. admonition:: Warning 
 
@@ -121,13 +115,13 @@ Steps
 
    .. admonition:: Warning 
 
-    Also, be sure that the ``clusterName`` parameter ("faircloth-test") in the above, comes **LAST** in the arugment list.  This argument is positional, and it looks like the cluster you create will not receive a name if the position of the arugment is incorrect.  This will cause downstream problems.
+    Also, be sure that the ``clusterName`` parameter ("faircloth-cactus") in the above, comes **LAST** in the arugment list.  This argument is positional, and it looks like the cluster you create will not receive a name if the position of the arugment is incorrect.  This will cause downstream problems.
 
    .. admonition:: Note 
 
-    We're passing a parameter that will mount a 1 TB EBS volume on the leader node using the ``--leaderStorage`` parameter.  If you need another amount of storage, adjust. Otherwise, exclude the entire parameter ``--leaderStorage 1000``.
+    We're passing a parameter that will mount a 1 TB EBS volume on the leader node using the ``--leaderStorage`` parameter.  If you need another amount of storage, adjust. Otherwise, exclude the entire parameter ``--leaderStorage 1000``.  We're doing the same for the each node with ``--nodeStorage 250`` giving all worker nodes 250 GB EBS Storage.
 
-#. This will spin up a ``t2.medium`` node, which is relatively small, and we'll start working on AWS through this node.  It can take some time, and you might want to monitor progress using the web interface to EC2.
+#. This will spin up a ``t2.medium`` node, which is relatively small, and we'll start working on AWS through this node.  It can take some time, and you might want to monitor progress using the web interface to EC2.  Toil should let you know when the leader node is ready.
 
 #. While the instance is starting and validating, we need to sync our data for analysis.  In my opinion, it's easiest to do this using S3.  Additionally, cactus_ can read ``s3://`` URLs.  So, put the fastas you want to sync (easiest if unzipped) in a directory on your local machine.  Then create an S3 bucket to hold those:
 
@@ -149,9 +143,9 @@ Steps
 
    .. code-block:: bash
 
-    toil ssh-cluster -z us-east-1a faircloth-test
+    toil ssh-cluster -z us-east-1a faircloth-cactus
 
-#. We need to install cactus and whatnot on the "leader" image:
+#. Once logged into the leader node, we need to install cactus and some helper programs on the "leader":
 
    .. code-block:: bash
 
@@ -160,26 +154,27 @@ Steps
     apt install -y git tmux vim
 
     # create a directory to hold our analysis
-    mkdir /opt/analysis
+    mkdir /data && cd /data
 
     # create a `cactus-env` virtual env in this folder
-    virtualenv --system-site-packages cactus-env
+    virtualenv --system-site-packages -p python3.6 cactus-env
 
     # activate that virtual env
     source cactus-env/bin/activate
 
     # get the cactus source from github
-    git clone https://github.com/comparativegenomicstoolkit/cactus.git
+    git clone https://github.com/comparativegenomicstoolkit/cactus.git  --recursive
 
     # install that in the cactus-env virtual env
-    cd cactus
+    cd cactus 
+    git checkout v1.0.0
     pip install --upgrade .
 
     # change back to our base analysis directory
-    cd /opt/analysis
+    cd /data
 
 
-#. Now, create a new file in ``/opt/analysis`` named ``seqFile.txt`` using ``vim``, and paste the required information into it. Be sure to adjust for your particular problem - this example uses the five genomes above and their ``s3://`` URLs:
+#. Now, create a new file in ``/data`` named ``seqFile.txt`` using ``vim``, and paste the required information into it. Be sure to adjust for your particular problem - this example uses the five genomes above and their ``s3://`` URLs:
 
    .. code-block:: bash
 
@@ -215,7 +210,7 @@ Steps
 
    .. code-block:: bash
 
-    # start tmux
+    # start tmux so we can exit the session while leaving cactus running
     tmux
     # make sure we're in the right place
     cd /opt/analysis
@@ -224,9 +219,18 @@ Steps
         --nodeTypes c4.8xlarge:0.6,r3.8xlarge \
         --minNodes 0,0 \
         --maxNodes 20,1 \
+        --nodeStorage 250 \
         --provisioner aws \
         --batchSystem mesos \
-        --metrics \
-        aws:us-east-1:faircloth-10-25-test \
+        --metrics aws:us-east-1:<your-name-here> \
+        --logFile cactus.log \
+        --rotatingLogging \
         seqFile.txt output.hal
 
+#. You can exit the tmux session and the leader node.
+
+#. If that runs successfully, there will be a ``output.hal`` file in ``/data``.
+
+#. You can download that ``output.hal`` file using toil
+
+    toil rsync-cluster -p aws -z us-east-1b faircloth-cactus :/data/output.hal .
