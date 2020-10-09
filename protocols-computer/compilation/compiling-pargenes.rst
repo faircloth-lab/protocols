@@ -28,7 +28,6 @@ Steps
    
         module load intel/18.0.0
         module load gcc/6.4.0
-        module load cmake/3.7.2/INTEL-18.0.0
         module load impi/2018.0.128
 
 
