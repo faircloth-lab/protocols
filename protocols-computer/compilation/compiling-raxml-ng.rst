@@ -30,12 +30,13 @@ Steps
         module load intel
         module load gcc/6.4.0
         module load impi/2018.0.128
-        module load cmake
 
 #. Set the correct ``CC`` and ``CXX`` variables so that they catch the correct IMPI versions after loading the modules:
 
-    export CC=`which mpicc`
-    export CXX=`which mpicxx`
+    .. code-block:: bash
+
+        export CC=`which mpicc`
+        export CXX=`which mpicxx`
 
 #. Make sure you have checked out the 0.8.1 tag, create and enter a build directory, and make sure to set cmake correctly so that it will build the MPI version.  There is no INSTALL directory, so don't sweat that:
 

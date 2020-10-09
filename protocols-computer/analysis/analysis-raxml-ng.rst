@@ -38,7 +38,7 @@ Preliminary Steps
 Data Preparation
 ----------------
 
-#. RAxML accepts data in two format: PHYLIP and FASTA. Setup directory structure on @supermike to contain these data. Generally speaking, I make a ``project`` folder within my ``work`` directory (where ``work`` is symlinked to ``/work/brant``.  So, using Anna's Diglossa as an example:
+#. RAxML accepts data in two format: PHYLIP and FASTA. Setup directory structure on @supermic to contain these data. Generally speaking, I make a ``project`` folder within my ``work`` directory (where ``work`` is symlinked to ``/work/brant``.  So, using Anna's Diglossa as an example:
 
     .. code-block:: bash
 
@@ -46,11 +46,11 @@ Data Preparation
         cd anna-diglossa
         mkdir alignments
 
-#. On the transfer machine (@tabasco), navgate to the directory holding the alignment files and transfer the alignments files to @supermike:
+#. On the transfer machine (@tabasco), navgate to the directory holding the alignment files and transfer the alignments files to @supermic:
 
     .. code-block:: bash
 
-        rsync -avLP ./ user@mike.hpc.lsu.edu:/home/brant/work/anna-diglossa/alignments
+        rsync -avLP ./ user@smic.hpc.lsu.edu:/home/brant/work/anna-diglossa/alignments
 
 #. Now that that's finished, setup a file that will (1) convert the alignment to a binary format, and (2) estimate the number of nodes/cores needed for optimal analysis. I do this in a file named something like ``raxml-parse.qsub``:
 
@@ -71,7 +71,7 @@ Data Preparation
 
         cd $PBS_O_WORKDIR
 
-        /project/brant/shared/bin/raxml-ng \
+        /project/brant/shared/bin/raxml-ng-1.0.1 \
         --msa /path/to/alignment/alignment.phylip \
         --model GTR+G \
         --parse
@@ -90,7 +90,7 @@ Data Preparation
 
         .. code-block:: bash
 
-            /project/brant/shared/bin/raxml-ng \
+            /project/brant/shared/bin/raxml-ng-1.0.1 \
             --msa /path/to/alignment/alignment.phylip \
             --model partition.txt \
             --parse
@@ -161,10 +161,10 @@ You have several ways of doing this, one of which is to use what I call "standar
 Standard MPI Mode
 :::::::::::::::::
 
-Using Standard MPI Mode To Search for the Best ML Tree + Boostrapping
+Using Standard MPI Mode To Search for the Best ML Tree + Bootstrapping
 .....................................................................
 
-Given the core count and RAM usage estimated above, on @supermike, we need to run 6 nodes each with 16 CPUS for a total of 96 CPUs.  We will also set this run up to automatically search for both the *best* ML tree and **bootstrap replicates** for this best ML tree.  That's accomplished with the ``--all`` option.  The other option we are passing is the ``--best-trees autoMRE`` option, which will generate bootstrap trees until those converge.  If you need to set the maximum number of boostrap replicated to generate using autoMRE, specify ``--bs-trees autoMRE{500}``, which will limit the analyses to only 500 trees (default is 1000). The ``--seed`` that we're setting (which we pass as an environment variable ``$SEED`` whose value it taken from $RANDOM) let's us repeat the exact analysis in the future, if needed.
+Given the core count and RAM usage estimated above, on @supermic, we need to run 6 nodes each with 16 CPUS for a total of 96 CPUs.  We will also set this run up to automatically search for both the *best* ML tree and **bootstrap replicates** for this best ML tree.  That's accomplished with the ``--all`` option.  The other option we are passing is the ``--best-trees autoMRE`` option, which will generate bootstrap trees until those converge.  If you need to set the maximum number of boostrap replicated to generate using autoMRE, specify ``--bs-trees autoMRE{500}``, which will limit the analyses to only 500 trees (default is 1000). The ``--seed`` that we're setting (which we pass as an environment variable ``$SEED`` whose value it taken from $RANDOM) let's us repeat the exact analysis in the future, if needed.
 
 With that information in hand, setup a second submission script ``raxml-best-tree.qsub`` that contains a version of the following:
 
@@ -187,7 +187,7 @@ With that information in hand, setup a second submission script ``raxml-best-tre
         SEED=$RANDOM
         echo $SEED
 
-        mpiexec -np 96 -machinefile $PBS_NODEFILE /project/brant/shared/bin/raxml-ng-mpi \
+        mpiexec -np 96 -machinefile $PBS_NODEFILE /project/brant/shared/bin/raxml-ng-mpi-1.0.1 \
             --msa alignments/drop2-mafft-nexus-edge-trimmed-clean-75p.phylip.raxml.rba \
             --seed $SEED \
             --all \
@@ -217,7 +217,7 @@ Sometimes, the tree you are trying to infer is large (due to the # of tips, the 
         SEED=$RANDOM
         echo $SEED
 
-        mpiexec -np 96 -machinefile $PBS_NODEFILE /project/brant/shared/bin/raxml-ng-mpi \
+        mpiexec -np 96 -machinefile $PBS_NODEFILE /project/brant/shared/bin/raxml-ng-mpi-1.0.1 \
             --msa alignments/drop2-mafft-nexus-edge-trimmed-clean-75p.phylip.raxml.rba \
             --seed $SEED \
             --search
@@ -248,7 +248,7 @@ Along similar lines, if you've separated how RAxML runs into two parts, you woul
         SEED=$RANDOM
         echo $SEED
 
-        mpiexec -np 96 -machinefile $PBS_NODEFILE /project/brant/shared/bin/raxml-ng-mpi \
+        mpiexec -np 96 -machinefile $PBS_NODEFILE /project/brant/shared/bin/raxml-ng-mpi-1.0.1 \
             --msa alignments/drop2-mafft-nexus-edge-trimmed-clean-75p.phylip.raxml.rba \
             --seed $SEED \
             --bootstrap \
@@ -277,7 +277,7 @@ And, if you have separate files for the best ML tree and the boostrap replicates
 
         cd $PBS_O_WORKDIR
 
-        /project/brant/shared/bin/raxml-ng \
+        /project/brant/shared/bin/raxml-ng-1.0.1 \
         --tree /path/to/bestML.tree \
         --bs-trees /path/to/bootstraps.tree \
         --support
