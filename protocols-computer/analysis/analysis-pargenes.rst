@@ -72,10 +72,15 @@ Steps
         #PBS -q checkpt
         #PBS -N pargenes
 
+        module purge
+        module load intel/18.0.0
+        module load gcc/6.4.0
+        module load impi/2018.0.128
+
         cd $PBS_O_WORKDIR
         CORES=16
 
-        python /project/brant/shared/src/pargenes/pargenes/pargenes.py \
+        python /project/brant/shared/src/pargenes-v1.1.2/pargenes/pargenes.py \
             -a input-alignments-fasta-reduced \
             -o input-alignments-fasta-reduced-pargenes-dry-run \
             -d nt \
@@ -93,10 +98,15 @@ Steps
         #PBS -q checkpt
         #PBS -N pargenes_dry_run
 
+        module purge
+        module load intel/18.0.0
+        module load gcc/6.4.0
+        module load impi/2018.0.128
+
         cd $PBS_O_WORKDIR
         CORES=512
 
-        python /project/brant/shared/src/pargenes/pargenes/pargenes.py \
+        python /project/brant/shared/src/pargenes-v1.1.2/pargenes/pargenes.py \
             -a input-alignments-fasta-reduced \
             -o input-alignments-fasta-reduced-pargenes-bootstraps \
             -d nt \
