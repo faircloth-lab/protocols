@@ -88,7 +88,7 @@ Steps
             -c $CORES \
             --dry-run
 
-#. This will produce an output folder (``input-alignments-fasta-reduced-pargenes-dry-run``).  In that folder is a log file that will contain an estimate of the number of cores we need to run a job optimally.  Remember that number.  Based on that number, setup a new ``qsub`` file for the "real" run of Pargenes_ where you adjust ``nodes=XX:ppn=YY`` and ``CORES``.  That will look something like the following, which will used 512 CPU cores to: (1) estimate the best site-rate substitution model for each locus, (2) estimate the best ML gene tree for each locus based on the most appropriate model, and (3) generate 200 boostrap replicates for everything:
+#. This will produce an output folder (``input-alignments-fasta-reduced-pargenes-dry-run``).  In that folder is a log file that will contain an estimate of the number of cores we need to run a job optimally.  Remember that number.  Based on that number, setup a new ``qsub`` file for the "real" run of Pargenes_ where you adjust ``nodes=XX:ppn=YY`` and ``CORES``.  That will look something like the following, which will used 512 CPU cores to: (1) estimate the best site-rate substitution model for each locus, (2) estimate the best ML gene tree for each locus based on the most appropriate model, and (3) generate 200 bootstrap replicates for everything:
 
     .. code-block:: bash
 
@@ -106,7 +106,7 @@ Steps
         cd $PBS_O_WORKDIR
         CORES=512
 
-        python /project/brant/shared/src/pargenes-v1.1.2/pargenes/pargenes.py \
+        python /project/brant/shared/src/pargenes-v1.1.2/pargenes/pargenes-hpc.py \
             -a input-alignments-fasta-reduced \
             -o input-alignments-fasta-reduced-pargenes-bootstraps \
             -d nt \
