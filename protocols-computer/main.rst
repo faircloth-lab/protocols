@@ -39,6 +39,7 @@ Analysis
     analysis/analysis-iq-tree
     analysis/analysis-SVD-quartets
     analysis/analysis-three-rad
+    analysis/analysis-gatk-parallel
 
 
 Snippets
