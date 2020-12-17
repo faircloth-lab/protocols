@@ -353,7 +353,7 @@ Steps
         ├── trimmomatic.qsub
         └── trimmomatic-sub.sh
     
-#. Now, we're read to mark duplicates in all of the BAM files. Again, we'll take the same approach as above, although this time we can use a shorter format. Let's create a file of threads, reference, and input file names:
+#. Now, we're ready to mark duplicates in all of the BAM files. Again, we'll take the same approach as above, although this time we can use a shorter format. Let's create a file of threads, reference, and input file names:
 
     .. code-block:: bash
     
