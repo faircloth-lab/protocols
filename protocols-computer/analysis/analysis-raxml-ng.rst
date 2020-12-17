@@ -162,7 +162,7 @@ Standard MPI Mode
 :::::::::::::::::
 
 Using Standard MPI Mode To Search for the Best ML Tree + Bootstrapping
-.....................................................................
+......................................................................
 
 Given the core count and RAM usage estimated above, on @supermic, we need to run 6 nodes each with 16 CPUS for a total of 96 CPUs.  We will also set this run up to automatically search for both the *best* ML tree and **bootstrap replicates** for this best ML tree.  That's accomplished with the ``--all`` option.  The other option we are passing is the ``--best-trees autoMRE`` option, which will generate bootstrap trees until those converge.  If you need to set the maximum number of boostrap replicated to generate using autoMRE, specify ``--bs-trees autoMRE{500}``, which will limit the analyses to only 500 trees (default is 1000). The ``--seed`` that we're setting (which we pass as an environment variable ``$SEED`` whose value it taken from $RANDOM) let's us repeat the exact analysis in the future, if needed.
 
