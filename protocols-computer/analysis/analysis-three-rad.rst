@@ -2,8 +2,8 @@
 .. |date| date:: %d %B %Y %H:%M %Z (%z)
 
 
-3RAD Demultiplexing and Analysis
-================================
+Running 3RAD Analysis
+=====================
 
 :Author: Brant C. Faircloth
 :Copyright: This documentation is available under a Creative Commons (`CC-BY`_) license.
@@ -11,13 +11,14 @@
 Modification History
 --------------------
 
-See `3RAD Demultiplexing and Analysis History`_ 
+See `Running 3RAD Analysis`_ 
 
-.. _3RAD Demultiplexing and Analysis History: http://github.com/faircloth-lab/protocols/commits/master/protocols-computer/analysis/analysis-three-rad.rst
+.. _Running 3RAD Analysis: http://github.com/faircloth-lab/protocols/commits/master/protocols-computer/analysis/analysis-three-rad.rst
 
 Purpose
 -------
 
+Demultiplex and analyze 3RAD data.
 
 Preliminary Steps
 -----------------
