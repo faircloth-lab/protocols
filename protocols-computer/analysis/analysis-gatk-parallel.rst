@@ -24,6 +24,11 @@ Prepare data and call SNPs following the GATK best practices guidelines (15 Dec 
 
         It is up to you to reasonably select how many nodes and cores you need for a particular job and to make sure things are working reasonably well before going ham on the data.
 
+In general, the information below follows both of the following:
+
+* `Data Preprocessing for Variant Discovery <https://gatk.broadinstitute.org/hc/en-us/articles/360035535912-Data-pre-processing-for-variant-discovery>`_
+* `Germline Short Variant Discovery (SNPs + Indels) <https://gatk.broadinstitute.org/hc/en-us/articles/360035535932-Germline-short-variant-discovery-SNPs-Indels->`_
+
 
 
 Preliminary Steps
@@ -54,17 +59,17 @@ Preliminary Steps
         # find out where python lives
         which python
         # change to the bin directory in this environment and
-        # link to the GATK wrapper which is back in the GATK package
+        # link to the gatk wrapper which is back in the gatk package
         ln -s <path to gatk wrapper>
 
-#. Theoretically, you will also want ``bwa`` and ``samtools`` in this directory to make your life easier.  You can install those with:
+#. Theoretically, you will also want ``bwa`` and ``samtools`` in this conda environment to make your life easier.  You can install those with:
 
     .. code-block:: bash
 
         conda activate gatk
         conda install bwa samtools=1.9
 
-#. That said, the above can be extremely slow. You may want to want to create another environment with an up-to-date ``bwa`` and ``samtools``.  This is usually much faster.  Be aware of the approach you take because it is important, later, in terms of how you call ``GATK`` relative to ``bwa`` or ``samtools``.
+#. That said, the above can be extremely slow. You may want to want to create another environment with an up-to-date ``bwa`` and ``samtools``.  This is usually much faster.  Be aware of the approach you take because it is important, later, in terms of how you call ``gatk`` relative to ``bwa`` or ``samtools``.
 
     .. code-block:: bash
 
@@ -186,7 +191,7 @@ Steps
         ├── trimmomatic.qsub
         └── trimmomatic-sub.sh
 
-#. Now, we need to generate the ``bwa`` index of the genome, as well as the sequence dictionary and fasta index that we'll need for GATK later.  Create ``bwa-index.qsub`` and then submit to the cluster.  This is all run single-threaded, so we don't use ``Parallel``:
+#. Now, we need to generate the ``bwa`` index of the genome, as well as the sequence dictionary and fasta index that we'll need for ``gatk`` later.  Create ``bwa-index.qsub`` and then submit to the cluster.  This is all run single-threaded, so we don't use ``Parallel``:
 
     .. code-block:: bash
 
@@ -580,7 +585,7 @@ Steps
             --remove-indels \
             --max-missing 0.5
 
-#. Now, you should review the GATK article on BQSR.  We can use the valid SNPs to perform BQSR, and we need to return to our original BAM files because these are what we are recalibrating. First thing we need to do is to make an input file listing the REFERENCE, the ``--known-sites``, and the BAM:
+#. Now, you should review the GATK `article on BQSR <https://gatk.broadinstitute.org/hc/en-us/articles/360035890531>`_.  We can use the valid SNPs to perform BQSR, and we need to return to our original BAM files because these are what we are recalibrating. First thing we need to do is to make an input file listing the REFERENCE, the ``--known-sites``, and the BAM:
 
     .. code-block:: bash
 
