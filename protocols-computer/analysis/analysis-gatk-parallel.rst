@@ -18,7 +18,12 @@ See `Running GATK in Parallel`_
 Purpose
 -------
 
-Nothing here yet.
+Prepare data and call SNPs following the GATK best practices guidelines (15 Dec 2020).  Specifically, parallelize jobs where possible using ``GNU Parallel``.  ``Parallel`` basically works by spinning up X number of nodes with Y number of cores, then distributing your jobs across those X nodes and Y cores, assigning each job Y cores of your choosed.  Some operations below are multithreaded; others are singlethreaded.
+
+    .. admonition:: Warn
+
+        It is up to you to reasonably select how many nodes and cores you need for a particular job and to make sure things are working reasonably well before going ham on the data.
+
 
 
 Preliminary Steps
@@ -128,7 +133,7 @@ Steps
         ILLUMINACLIP:$HOME/jar/Trimmomatic-0.39/adapters/TruSeq3-PE-2.fa:2:30:10:2:keepBothReads LEADING:3 TRAILING:3 MINLEN:60
 
 #. We need to make that executable (``chmod +x trimmomatic-sub.sh``)
-#. Finally, we need to build the submission script to call GNU Parallel and run our job on multiple nodes.  You will need to decide how many nodes to use to trim your samples.  This should parallelize across all nodes.  Be sure to edit the ``CORES_PER_JOB`` to be equivalent to the value you selection above.  Here, we're using 4 cores per job across 2 nodes of 20 cores each (so 5 jobs per node are running simultaneously):
+#. Finally, we need to build the submission script to call ``Parallel`` and run our job on multiple nodes.  You will need to decide how many nodes to use to trim your samples.  This should parallelize across all nodes.  Be sure to edit the ``CORES_PER_JOB`` to be equivalent to the value you selection above.  Here, we're using 4 cores per job across 2 nodes of 20 cores each (so 5 jobs per node are running simultaneously):
 
     .. code-block:: bash
 
@@ -162,7 +167,11 @@ Steps
                 --workdir $PBS_O_WORKDIR \
                 -a files-to-trim.txt \
                 ./trimmomatic-sub.sh {$1} {$2}
-    
+
+    .. admonition:: Note
+
+        Select a reasonable number of nodes and cores per job for your circumstance.  You will most likely want to scale up from what I have above.
+
 #. Once we have trimmed our reads, it's time to setup the genome to which we want to map our reads.  Create a folder (``reference``) to hold the genome, then place the FASTA file for the assembly in this folder.  So, our working directory looks like this:
 
     .. code-block:: bash
@@ -177,7 +186,7 @@ Steps
         ├── trimmomatic.qsub
         └── trimmomatic-sub.sh
 
-#. Now, we need to generate the ``bwa`` index of the genome, as well as the sequence dictionary and fasta index that we'll need for GATK later.  Create ``bwa-index.qsub`` and then submit to the cluster:
+#. Now, we need to generate the ``bwa`` index of the genome, as well as the sequence dictionary and fasta index that we'll need for GATK later.  Create ``bwa-index.qsub`` and then submit to the cluster.  This is all run single-threaded, so we don't use ``Parallel``:
 
     .. code-block:: bash
 
@@ -262,7 +271,7 @@ Steps
         samtools index -@ $THREADS $SAMPLE_NAME.sorted.bam &&
         rm $SAMPLE_NAME.bam
 
-#. Now, setup the qsub that we need to run the jobs in parallel.  Be sure to enter the number of threads you selected for each job at the top of the script
+#. Next, setup the qsub that we need to run the jobs in parallel.  Be sure to enter the number of threads you selected for each job at the top of the script
 
     .. code-block:: bash
 
@@ -294,7 +303,11 @@ Steps
                 --slf $PBS_NODEFILE \
                 --workdir $PBS_O_WORKDIR \
                 -a files-to-align.txt \
-                ./bwa-align-sub.sh {$1} {$2} {$3} {$4} {$5} 
+                ./bwa-align-sub.sh {$1} {$2} {$3} {$4} {$5}
+
+    .. admonition:: Note
+
+        Select a reasonable number of nodes and cores per job for your circumstance.  You will most likely want to scale up from what I have above (this was for running 6 samples)
 
 #. Once that's all finished, your directory structure should look something like this:
 
@@ -412,6 +425,10 @@ Steps
                 -a bams-to-clean.txt \
                 ./mark-and-fix-dupes-sub.sh {$1} {$2} {$3}
 
+    .. admonition:: Note
+
+        Select a reasonable number of nodes and cores per job for your circumstance.  You will most likely want to scale up from what I have above.
+
 #. If you already have set of very high-quality SNPs that you can perform Variant Quality Score Recalibration (VQSR) with at this stage - do that (see below).  We will assume that you do not have these, so you need to go through at least one round of SNP calling to generate this set. That begins with ``HaplotypeCaller`` in GVCF-output mode, which we will run in single-threads, but setting the RAM for each thread file to 4 GB.  On @smic, this means we can run a total of 16 threads.  First, make file that contains the path to our REFERENCE sequence and each BAM file:
 
     .. code-block:: bash
@@ -456,19 +473,17 @@ Steps
         #PBS -q checkpt
         #PBS -N multi_haplotype_call
 
-        # SET THE NUMBER of Cores per job (the number of cores on a node needs to be divisible by this #)
-        export CORES_PER_JOB=1
-
         # DONT EDIT BELOW #
+        
+        # set number of jobs per node
+        # based on 4 GB RAM per job
+        export JOBS_PER_NODE=16
 
         # load GNU parallel
         module load gnuparallel/20170122
 
         # move into the directory containing this script
         cd $PBS_O_WORKDIR
-
-        # automatically set the number of Jobs per node based on $CORES_PER_JOB
-        export JOBS_PER_NODE=$(($PBS_NUM_PPN / $CORES_PER_JOB))
 
         parallel --colsep '\,' \
                 --progress \
@@ -478,6 +493,10 @@ Steps
                 --workdir $PBS_O_WORKDIR \
                 -a bams-to-haplotype-call.txt \
                 ./haplotype-gvcf-sub.sh {$1} {$2}
+
+    .. admonition:: Note
+
+        Select a reasonable number of nodes for your circumstance.  You will most likely want to scale up from what I have above.
 
 #. Now, we need to integrate the GVCF files together, and the first step of that uses ``GenomicsDBImport``. ``GenomicsDBImport`` requires a tab delimited list of sample names and file names for each sample, so generate that:
 
@@ -489,7 +508,7 @@ Steps
             echo -e "$name\t$VCF" >> gvcfs-for-db-import.sample_map;
         done
 
-#. Now we can run ``GenomicsDBImport`` to bring together all the gvcf files.  You will run this normally using @smic.  This is not multithreaded:
+#. Now we can run ``GenomicsDBImport`` to bring together all the gvcf files.  This is not multithreaded, so you will run it with a standard qsub script:
 
     .. code-block:: bash
 
@@ -561,7 +580,7 @@ Steps
             --remove-indels \
             --max-missing 0.5
 
-#. Now, you should review the GATK article on BQSR.  We can use the valid SNPs to perform BQSR, and we need to return to our original BAM files because these are what we are recalibrating.  First thing we need to do is to make an input file listing the REFERENCE, the ``--known-sites``, and the BAM:
+#. Now, you should review the GATK article on BQSR.  We can use the valid SNPs to perform BQSR, and we need to return to our original BAM files because these are what we are recalibrating. First thing we need to do is to make an input file listing the REFERENCE, the ``--known-sites``, and the BAM:
 
     .. code-block:: bash
 
@@ -618,19 +637,17 @@ Steps
         #PBS -q checkpt
         #PBS -N multi_bqsr
 
-        # SET THE NUMBER of Cores per job (the number of cores on a node needs to be divisible by this #)
-        export CORES_PER_JOB=1
-
         # DONT EDIT BELOW #
+
+        # set the number of jobs per node
+        # based on 4 GB RAM per job
+        export JOBS_PER_NODE=16
 
         # load GNU parallel
         module load gnuparallel/20170122
 
         # move into the directory containing this script
         cd $PBS_O_WORKDIR
-
-        # automatically set the number of Jobs per node based on $CORES_PER_JOB
-        export JOBS_PER_NODE=$(($PBS_NUM_PPN / $CORES_PER_JOB))
 
         parallel --colsep '\,' \
                 --progress \
@@ -640,3 +657,7 @@ Steps
                 --workdir $PBS_O_WORKDIR \
                 -a bams-to-recalibrate.txt \
                 ./bam-bqsr-sub.sh {$1} {$2} {$3}
+
+    .. admonition:: Note
+
+        Select a reasonable number of nodes for your circumstance.  You will most likely want to scale up from what I have above.
