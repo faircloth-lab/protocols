@@ -103,34 +103,34 @@ Steps
 
     .. code-block:: bash
 
-.
-├── reference
-│   ├── bwa_index.e562696
-│   ├── bwa_index.o562696
-│   ├── bwa_index.qsub
-│   ├── ScNXozI_1979.dict
-│   ├── ScNXozI_1979.fasta
-│   ├── ScNXozI_1979.fasta.amb
-│   ├── ScNXozI_1979.fasta.ann
-│   ├── ScNXozI_1979.fasta.bwt
-│   ├── ScNXozI_1979.fasta.pac
-│   └── ScNXozI_1979.fasta.sa
-└── trimmed-fastq
-    ├── LSU_11071
-    │   ├── LSU_11071.ScNXozI_1979.r1.fastq.gz
-    │   └── LSU_11071.ScNXozI_1979.r2.fastq.gz
-    ├── LSU_73043
-    │   ├── LSU_73043.ScNXozI_1979.r1.fastq.gz
-    │   └── LSU_73043.ScNXozI_1979.r2.fastq.gz
-    ├── LSU_80496
-    │   ├── LSU_80496.ScNXozI_1979.r1.fastq.gz
-    │   └── LSU_80496.ScNXozI_1979.r2.fastq.gz
-    ├── LSU_80711
-    │   ├── LSU_80711.ScNXozI_1979.r1.fastq.gz
-    │   └── LSU_80711.ScNXozI_1979.r2.fastq.gz
-    └── LSU_81131
-        ├── LSU_81131.ScNXozI_1979.r1.fastq.gz
-        └── LSU_81131.ScNXozI_1979.r2.fastq.gz
+        .
+        ├── reference
+        │   ├── bwa_index.e562696
+        │   ├── bwa_index.o562696
+        │   ├── bwa_index.qsub
+        │   ├── ScNXozI_1979.dict
+        │   ├── ScNXozI_1979.fasta
+        │   ├── ScNXozI_1979.fasta.amb
+        │   ├── ScNXozI_1979.fasta.ann
+        │   ├── ScNXozI_1979.fasta.bwt
+        │   ├── ScNXozI_1979.fasta.pac
+        │   └── ScNXozI_1979.fasta.sa
+        └── trimmed-fastq
+            ├── LSU_11071
+            │   ├── LSU_11071.ScNXozI_1979.r1.fastq.gz
+            │   └── LSU_11071.ScNXozI_1979.r2.fastq.gz
+            ├── LSU_73043
+            │   ├── LSU_73043.ScNXozI_1979.r1.fastq.gz
+            │   └── LSU_73043.ScNXozI_1979.r2.fastq.gz
+            ├── LSU_80496
+            │   ├── LSU_80496.ScNXozI_1979.r1.fastq.gz
+            │   └── LSU_80496.ScNXozI_1979.r2.fastq.gz
+            ├── LSU_80711
+            │   ├── LSU_80711.ScNXozI_1979.r1.fastq.gz
+            │   └── LSU_80711.ScNXozI_1979.r2.fastq.gz
+            └── LSU_81131
+                ├── LSU_81131.ScNXozI_1979.r1.fastq.gz
+                └── LSU_81131.ScNXozI_1979.r2.fastq.gz
 
 If your data are in a format similar to those output by trimmomatic (reads within names directories - like the above), you can map across those directories of raw reads in serial, using something like the following (see below for parallel execution).  This scripts assumes you are using a single node with 20 compute cores, and that your directory structure is similar to the above.  
 
@@ -138,7 +138,7 @@ If your data are in a format similar to those output by trimmomatic (reads withi
     
     Note that in the following, we're adding the ``RG`` ("read group) headers to each BAM file we create - this is basically a way that downstream programs can identify "individual-specific" data when we do things like combine BAM files.  For more information on RG headers, see `this document <https://gatk.broadinstitute.org/hc/en-us/articles/360035890671-Read-groups>`_.
 
-#. Before running, create a directory named ``bams``, and this is where we'll be working from.  Copy the script below into ``bams`` as ``bwa_align and submit it with qsub.
+#. Before running, create a directory named ``bams``, and this is where we'll be working from.  Copy the script below into ``bams`` as ``bwa_align`` and submit it with qsub.
 
 .. code-block:: bash
 
