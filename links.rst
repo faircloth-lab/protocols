@@ -74,3 +74,4 @@
 .. _aws: https://aws.amazon.com
 .. _ec2: https://aws.amazon.com/ec2/
 .. _GATK: https://gatk.broadinstitute.org/hc/en-us
+.. _BBmap: https://jgi.doe.gov/data-and-tools/bbtools/bb-tools-user-guide/bbmap-guide/
