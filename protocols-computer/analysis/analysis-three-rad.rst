@@ -1,6 +1,7 @@
 .. include:: ../../links.rst
 .. |date| date:: %d %B %Y %H:%M %Z (%z)
 
+.. _3RAD protocol:
 
 Running 3RAD Analysis
 =====================
@@ -138,31 +139,36 @@ Steps
 
 #.  The above should also place the data in ``$HOME/threerad/demultiplex``. After the file are demultiplexed, we have two choices to make - *De novo Analysis* or *Reference-based Analysis*
 
+.. _RAD Reference Based Analysis:
+
 Reference-based Analysis
 ^^^^^^^^^^^^^^^^^^^^^^^^
 
-#. On supermike, we should install a recent version of ``bwa``.  You can do that by building from source:
-    
-    .. code-block:: bash
-
-        mkdir $HOME/src
-        cd src
-        wget $(wget -O - https://api.github.com/repos/lh3/bwa/releases | grep tarball_url| head -n 1 | cut -d '"' -f 4)
-        tar -xzvf v0.*
-        cd v0.*
-        make
-
-#. Make sure the binaries produced are in your ``$PATH``.
-
-#. We also need a reasonably recent version of samtools, but you can use the version that is on Supermike for the following. If you build ``samtools``, make sure the binaries produced are in your ``$PATH``.
-
-#. Now, we need to get our reference genome from wherever it is located, and upload it to supermike (or similar). As before, I will assume you are running everything in ``$HOME/work/threerad``.  Upload your genome to ``$HOME/work/threerad/genome/my_genome.fasta``
-
-#. We need to index the reference genome that we are using, prior to running alignment (this may take some time):
+#. Create a conda/miniconda environment with an up-to-date ``bwa`` and ``samtools``.
 
     .. code-block:: bash
 
-        cd $HOME/work/threerad/genome/
+        conda create -n mapping bwa samtools=1.9
+
+#. Now, we need to get our reference genome from wherever it is located, and upload it to @supermic or @supermike. I will assume you are running everything in ``$HOME/work/threerad``, but your paths and directory structure may be different, particularly if you were linked here from other protocols (e.g. like :ref:`RADcap protocol`).  Upload your genome to ``$HOME/work/threerad/genome/my_genome.fasta``
+
+#. We need to index the reference genome that we are using, prior to running alignment (this may take some time), create a qsub script in the same directory:
+
+    .. code-block:: bash
+
+        #PBS -A <allocation_name>
+        #PBS -l nodes=1:ppn=1
+        #PBS -l walltime=4:00:00
+        #PBS -q single
+        #PBS -N bwa_index
+
+        # move into the directory containing this script
+        cd $PBS_O_WORKDIR
+
+        # activate conda environment
+        source activate mapping
+
+        # index the genome
         bwa index my_genome.fasta
 
 #. Go back to the top level of the directory where we are working:
@@ -190,6 +196,9 @@ Running stacks on multiple HPC nodes
         ## set this manually
         CORES_PER_JOB=4
 
+        # activate conda environment
+        source activate mapping
+
         ## DO NOT EDIT BELOW THIS LINE - this comes as input from GNU parallel on STDIN, via the sample.list file
 
         SAMPL=$(basename $1)
@@ -203,7 +212,7 @@ Running stacks on multiple HPC nodes
         # run bwa and output BAM
         bwa mem -t $CORES_PER_JOB $GENOME $READ1 $READ2 | samtools view -bS - > $SAMPL.bam
 
-        # filter BAM for duplicate reads, imperfect matches, and >5 SNPs per read (NM:i:[0-5], below)
+        # filter BAM for primary mapping reads, imperfect matches, and >5 SNPs per read (NM:i:[0-5], below)
         samtools view -h -q 25 -F 4 -F 256 $SAMPL.bam | grep -v XA:Z | grep -v SA:Z | awk '{if($0 ~ /^@/ || $6 ~ /140M/) {print $0}}' | grep -E '^@|NM:i:[0-5]\s' | samtools view -bS - > $SAMPL.q30.unique.perfect.bam
 
         # remove the unfiltered BAM file
@@ -237,13 +246,24 @@ Running stacks on multiple HPC nodes
                 -a sample.list \
                 ./multi_bwa.sh {$1} {$2} {$3} {$4}
 
-#. Finally, you need to create the ``sample.list`` that will be read by ``bwa_run.qsub`` and passed to ``multi_bwa.sh``.  The easiest way to do this is to: (1) note the path to your ``bwa``-indexed genome, then (2) run (be sure to use the ``$PATH`` to *your* genome):
-   
+#. Finally, you need to create the ``sample.list`` that will be read by ``bwa_run.qsub`` and passed to ``multi_bwa.sh``.  The easiest way to do this is to: (1) note the path to your ``bwa``-indexed genome, then (2) run the following while being sure to use the ``$PATH`` to *your* genome and the correct path to your raw-reads:
+
+
     .. code-block:: bash
    
         cd $HOME/work/threerad
         GENOME=$HOME/work/threerad/genome/my_genome.fasta
         ls -d $PWD/raw-reads/*.1.fq.gz | sed -E "s/(.*).1.fq.gz/\1,\1.1.fq.gz,\1.2.fq.gz/" | sed -E "s|.*|&,$GENOME|" > bwa-alignments/sample.list
+
+    .. admonition:: Warning
+
+        If you were linked to this protocol from :ref:`RADcap protocol`, you want the path to the "raw-reads" to reflect the actual location of your **clone-filtered** reads, so you may need to alter the above to be something like:
+
+        .. code-block:: bash
+
+            cd $HOME/work/radcap
+            GENOME=$HOME/work/radcap/genome/my_genome.fasta
+            ls -d $PWD/duplicates-removed/*.1.fq.gz | sed -E "s/(.*).1.fq.gz/\1,\1.1.fq.gz,\1.2.fq.gz/" | sed -E "s|.*|&,$GENOME|" > bwa-alignments/sample.list
 
 #. This will create the file ``bwa-alignments/sample.list``, which will contain the following columns of information:
 
@@ -255,6 +275,8 @@ Running stacks on multiple HPC nodes
         4. path to your indexed genome
 
 #. After that's all done, you can submit the QSUB script by running ``qsub bwa_run.qsub``.  You jobs should start once the queue has room, and they should not take too long to run (the 2 hour queue-time is sufficient to align several hundred MBs of data for each sample).
+
+
    
 #. Next, we need to run ``pstacks`` against all of the BAM files we just created.  to do that, first ``cd $HOME/work/threerad``, then ``mkdir stacks`` and ``cd stacks``.  In this directory, we need to create a shell script to run pstacks ``multi_pstacks.sh``, a QSUB file to submit that job (``pstacks_run.qsub``), and a ``sample-bam.list``.  Create ``multi_pstacks.sh`` first so that it looks like (again, you can change ``CORES_PER_JOB``, but be sure to also change this in ``pstacks_run.qsub``, if you do):
 

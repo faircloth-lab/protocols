@@ -1,6 +1,7 @@
 .. include:: ../../links.rst
 .. |date| date:: %d %B %Y %H:%M %Z (%z)
 
+.. _Demultiplex Sequencing Run:
 
 Demultiplexing a Sequencing Run
 ===============================

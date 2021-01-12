@@ -1,6 +1,7 @@
 .. include:: ../../links.rst
 .. |date| date:: %d %B %Y %H:%M %Z (%z)
 
+.. _GATK protocol:
 
 Running GATK in Parallel
 ========================
@@ -86,6 +87,9 @@ Preliminary Steps
 
 Steps
 -----
+
+Data Trimming
+:::::::::::::
 
 #. When you get started, your read files are going to look something like this. Note that there is a similar pattern to the read files where the first part of each read name is the same up to the ``*.1.fastq.gz`` and ``*.2.fastq.gz`` - this is pretty common and we are going to take advantage of that:
 
@@ -176,6 +180,11 @@ Steps
     .. admonition:: Note
 
         Select a reasonable number of nodes and cores per job for your circumstance.  You will most likely want to scale up from what I have above.
+
+.. _GATK alignment:
+
+Read Alignment
+::::::::::::::
 
 #. Once we have trimmed our reads, it's time to setup the genome to which we want to map our reads.  Create a folder (``reference``) to hold the genome, then place the FASTA file for the assembly in this folder.  So, our working directory looks like this:
 
